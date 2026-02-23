@@ -25,7 +25,8 @@ public class GlyphMesh {
     public Vector2f start;
     public Vector2f end;
     
-    public GlyphMesh(Vector2f start, Vector2f end, Glyph glyph){
+  
+    public GlyphMesh(Vector2f start, Vector2f end, Vector2f boundStart, Vector2f boundEnd, float depth, Glyph glyph){
     
         this.glyph = glyph;
         this.start = start;
@@ -34,10 +35,10 @@ public class GlyphMesh {
 
 // 1. Define the vertices
 Vector3f[] vertices = new Vector3f[4];
-vertices[0] = new Vector3f(start.x, start.y, 0);
-vertices[1] = new Vector3f(end.x, start.y, 0);
-vertices[2] = new Vector3f(start.x, end.y, 0);
-vertices[3] = new Vector3f(end.x, end.y, 0);
+vertices[0] = new Vector3f(start.x, start.y, depth);
+vertices[1] = new Vector3f(end.x, start.y, depth);
+vertices[2] = new Vector3f(start.x, end.y, depth);
+vertices[3] = new Vector3f(end.x, end.y, depth);
 
 // 2. Define the texture coordinates (UV)
 Vector2f[] texCoord = new Vector2f[4];
@@ -65,8 +66,10 @@ geom = new Geometry("Glyph", mesh);
 
     // 3. Set parameters defined in the .j3md file
     mat.setColor("Color", ColorRGBA.White);
-    
     mat.setTexture("ColorMap", glyph.glyph());
+    
+    mat.setVector2("Start", boundStart);
+    mat.setVector2("End", boundEnd);
     
     geom.setMaterial(mat);
     App.app.getRootNode().attachChild(geom);

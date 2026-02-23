@@ -2,6 +2,9 @@ MaterialDef Glyph {
     MaterialParameters {
         Texture2D ColorMap
         Color Color
+        Vector2 Start
+        Vector2 End
+       
     }
 
     Technique Default {
@@ -14,6 +17,8 @@ MaterialDef Glyph {
 
         Defines {
             HAS_COLORMAP : ColorMap
+            HAS_START : Start
+            HAS_END : End
         }
     }
 }
