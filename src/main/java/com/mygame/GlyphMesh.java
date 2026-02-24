@@ -5,9 +5,11 @@
 package com.mygame;
 
 import com.jme3.material.Material;
+import com.jme3.material.RenderState;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
+import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Mesh;
 import com.jme3.scene.VertexBuffer.Type;
@@ -67,10 +69,14 @@ geom = new Geometry("Glyph", mesh);
     // 3. Set parameters defined in the .j3md file
     mat.setColor("Color", ColorRGBA.White);
     mat.setTexture("ColorMap", glyph.glyph());
-    
+    mat.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
+    mat.getAdditionalRenderState().setDepthTest(true);
+    mat.getAdditionalRenderState().setDepthWrite(true);
+
     mat.setVector2("Start", boundStart);
     mat.setVector2("End", boundEnd);
     
+    geom.setQueueBucket(RenderQueue.Bucket.Gui);
     geom.setMaterial(mat);
     App.app.getRootNode().attachChild(geom);
 // Optional: If you don't define normals manually, use this:

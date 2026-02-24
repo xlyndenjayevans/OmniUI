@@ -15,6 +15,11 @@ MaterialDef Glyph {
             WorldViewProjectionMatrix
         }
 
+       // RenderState {
+         //   Blend Alpha
+           // DepthWrite Off // Important: Transparent objects shouldn't block depth
+        //}
+
         Defines {
             HAS_COLORMAP : ColorMap
             HAS_START : Start

@@ -11,7 +11,7 @@ in vec3 location;
 out vec4 fragColor;
 
 void main() {
-    vec4 color = m_Color;
+    vec4 texColor = m_Color;
 
     #ifdef HAS_START
         #ifdef HAS_END
@@ -22,9 +22,15 @@ void main() {
     #endif
     
     #ifdef HAS_COLORMAP
-        color *= texture(m_ColorMap, texCoord);
+        texColor = texture2D(m_ColorMap, texCoord);
     #endif
 
-    if (color.a < 0.01) discard; // Optimization for transparency
-    fragColor = color;
+    if (texColor.a < 0.01) discard; // Optimization for transparency
+    
+    
+    // Multiply the texture alpha by the material color alpha
+    float finalAlpha = texColor.a * m_Color.a;
+    
+    // Output the color with the modified alpha
+    gl_FragColor = vec4(texColor.rgb * m_Color.rgb, finalAlpha);
 }

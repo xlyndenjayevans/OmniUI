@@ -25,9 +25,13 @@ public class App {
         App.app = main;
         
         Glyph boundCircle = new Glyph((short)256, (short)256, (short)4);
-        boundCircle.drawCircle(new Vector2f(128,128), (short)128, new Vector4f(255,255,255,255));
-        GlyphMesh boundCircleMesh = new GlyphMesh(new Vector2f(-0.5f, -0.5f), new Vector2f(0.5f, 0.5f),new Vector2f(-0.25f, -0.25f), new Vector2f(0.25f, 0.25f), (short)0, boundCircle);
+        boundCircle.drawCircle(new Vector2f(256,128), (short)128, new Vector4f(255,255,255,255));
+        GlyphMesh boundCircleMesh = new GlyphMesh(new Vector2f(-0.5f, -0.5f), new Vector2f(0.5f, 0.5f),new Vector2f(-0.5f, -0.5f), new Vector2f(0.5f, 0.5f), 0, boundCircle);
         boundCircleMesh.render();
+        Glyph innerBoundCircle = new Glyph((short)256, (short)256, (short)4);
+        innerBoundCircle.drawCircle(new Vector2f(128,128), (short)64, new Vector4f(255,0,0,128));
+        GlyphMesh innerBoundCircleMesh = new GlyphMesh(new Vector2f(-0.5f, -0.5f), new Vector2f(0.5f, 0.5f),new Vector2f(-0.5f, -0.5f), new Vector2f(0.5f, 0.5f),  -0.01f, innerBoundCircle);
+        innerBoundCircleMesh.render();
         /*
         Glyph container = new Glyph((short)1,(short)1,(short)4);
         container.drawCircle(new Vector2f(), (short)1, new Vector4f(255,255,255,255));
@@ -100,7 +104,7 @@ public class App {
         App.allGlyphMeshes.put("Glyph", glyphMesh);
         App.allGlyphMeshes.put("Save", saveGlyphMesh);
         */
-                
+        App.allGlyphMeshes = new HashMap<>();        
         App.app.getInputManager().addRawInputListener(new OmniInputListener());
         
     }
