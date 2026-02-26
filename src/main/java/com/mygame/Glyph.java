@@ -33,6 +33,10 @@ public class Glyph implements Savable {
     public short depth;
     
     Texture2D texture;
+   
+    public Glyph(){
+    
+    }
     
     public Glyph(short width, short height, short depth){
     
@@ -42,9 +46,10 @@ public class Glyph implements Savable {
         
         this.layer = new byte[width][height][depth];
         this.saveLayer = new byte [width * height * depth];
-        
+      //  this.layer = (Glyph)(App.app.getAssetManager().loadAsset("Glyphs/UpperCaseA.glyph"));
     }
     
+      
     
    public Texture2D glyph(){
     
