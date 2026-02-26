@@ -4,13 +4,17 @@
  */
 package com.mygame;
 
+import java.util.HashMap;
+
 /**
  *
  * @author xlyndenjayevans
  */
 public class Omni {
     
-    public Omni(){
+    public HashMap<String, Omni> omnis;
+    
+    public Omni(String text, Glyph backgroundImage){
     
     }
 }
