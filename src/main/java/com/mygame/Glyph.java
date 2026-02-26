@@ -133,14 +133,22 @@ texture.setMagFilter(Texture.MagFilter.Bilinear);
     @Override
     public void write(JmeExporter je) throws IOException {
         OutputCapsule capsule = je.getCapsule(this);
-        capsule.write(saveLayer, "saveLayer", new byte[width * height * depth]);
+        capsule.write(width, "width", 1);
+        capsule.write(height, "height", 1);
+        capsule.write(depth, "depth", 1);
+        capsule.write(saveLayer, "saveLayer", new byte[1]);
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public void read(JmeImporter ji) throws IOException {
         InputCapsule capsule = ji.getCapsule(this);
-        saveLayer = capsule.readByteArray("saveLayer", new byte[width * height * depth]);
+         
+        width = (short) capsule.readInt("width", (short)1);
+        height = (short) capsule.readInt("height", (short)1);
+        depth = (short) capsule.readInt("depth", (short)1);
+        saveLayer = capsule.readByteArray("saveLayer", new byte[1]);
+        layer = new byte[width][height][depth];
         int i = 0;
     for (short y = 0; y < height; y++){
     for (short x = 0; x < width; x++){

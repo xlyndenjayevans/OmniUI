@@ -25,11 +25,11 @@ public class App {
         App.app = main;
         
         App.app.getAssetManager().registerLoader(GlyphLoader.class, "glyph", "glyph");
-       // Glyph boundCircle =//.loadModel("Models/MyModel.j3o");
+        Glyph boundCircle = (Glyph) App.app.getAssetManager().loadAsset("Glyphs/UpperCaseA.glyph");//.loadModel("Models/MyModel.j3o");
    
         //boundCircle.drawCircle(new Vector2f(256,128), (short)128, new Vector4f(255,255,255,255));
-      //  GlyphMesh boundCircleMesh = new GlyphMesh(new Vector2f(-0.5f, -0.5f), new Vector2f(0.5f, 0.5f),new Vector2f(-0.5f, -0.5f), new Vector2f(0.5f, 0.5f), 0, boundCircle);
-        //boundCircleMesh.render();
+        GlyphMesh boundCircleMesh = new GlyphMesh(new Vector2f(-0.5f, -0.5f), new Vector2f(0.5f, 0.5f),new Vector2f(-0.5f, -0.5f), new Vector2f(0.5f, 0.5f), 0, boundCircle);
+        boundCircleMesh.render();
         Glyph innerBoundCircle = new Glyph((short)256, (short)256, (short)4);
         innerBoundCircle.drawCircle(new Vector2f(128,128), (short)64, new Vector4f(255,0,0,128));
         GlyphMesh innerBoundCircleMesh = new GlyphMesh(new Vector2f(-0.5f, -0.5f), new Vector2f(0.5f, 0.5f),new Vector2f(-0.5f, -0.5f), new Vector2f(0.5f, 0.5f),  -0.01f, innerBoundCircle);
