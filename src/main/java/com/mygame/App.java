@@ -26,7 +26,9 @@ public class App {
         
         App.app.getAssetManager().registerLoader(GlyphLoader.class, "glyph", "glyph");
 
-        TextGlyph text = new TextGlyph('&', 0, new Vector2f(.5f,0.5f), new Vector2f(.5f,.5f), new Vector2f(), new Vector2f(1,1));
+        Omni sentence = new Omni("&&&&", 0.02f, new Vector2f(-1,0), new Vector2f(0,1), new Glyph());
+        
+       // TextGlyph text = new TextGlyph('&', 0, new Vector2f(.5f,0.5f), new Vector2f(.5f,.5f), new Vector2f(), new Vector2f(1,1));
 //        Glyph boundCircle = (Glyph) App.app.getAssetManager().loadAsset("Glyphs/UpperCaseA.glyph");//.loadModel("Models/MyModel.j3o");
 //   
 //        //boundCircle.drawCircle(new Vector2f(256,128), (short)128, new Vector4f(255,255,255,255));
