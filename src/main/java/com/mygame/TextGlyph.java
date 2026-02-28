@@ -73,7 +73,7 @@ public class TextGlyph {
           else if(text == ','){
         
             glyph = (Glyph) App.app.getAssetManager().loadAsset("Glyphs/Comma.glyph");//.loadModel("Models/MyModel.j3o");
-            symbolic = Symbol.NUMBER;
+            symbolic = Symbol.HANGINGLOWERCASE;
         }
         
          else if(text == '-'){
@@ -169,12 +169,12 @@ public class TextGlyph {
           else if(text == 'h'){
         
             glyph = (Glyph) App.app.getAssetManager().loadAsset("Glyphs/LowerCaseH.glyph");//.loadModel("Models/MyModel.j3o");
-    symbolic = Symbol.LOWERCASE;
+    symbolic = Symbol.UPPERCASE;
         }
           else if(text == 'i'){
         
             glyph = (Glyph) App.app.getAssetManager().loadAsset("Glyphs/LowerCaseI.glyph");//.loadModel("Models/MyModel.j3o");
-    symbolic = Symbol.LOWERCASE;
+    symbolic = Symbol.UPPERCASE;
         }
           else if(text == 'j'){
         
@@ -189,7 +189,7 @@ public class TextGlyph {
           else if(text == 'l'){
         
             glyph = (Glyph) App.app.getAssetManager().loadAsset("Glyphs/LowerCaseL.glyph");//.loadModel("Models/MyModel.j3o");
-    symbolic = Symbol.LOWERCASE;
+    symbolic = Symbol.UPPERCASE;
         }
           else if(text == 'm'){
         
@@ -294,7 +294,7 @@ public class TextGlyph {
         else if(text == '.'){
         
             glyph = (Glyph) App.app.getAssetManager().loadAsset("Glyphs/Period.glyph");//.loadModel("Models/MyModel.j3o");
-    symbolic = Symbol.NUMBER;
+    symbolic = Symbol.HANGINGLOWERCASE;
         }
         else if(text == '+'){
         
@@ -491,7 +491,32 @@ public class TextGlyph {
             glyph = (Glyph) App.app.getAssetManager().loadAsset("Glyphs/Zero.glyph");//.loadModel("Models/MyModel.j3o");
     symbolic = Symbol.NUMBER;
         }
+        else if (text == ' '){
         
-        glyphMesh = new GlyphMesh(center.subtract(new Vector2f(size.x, size.y)), (center.add(new Vector2f(size.x, size.y))), boundStart, boundEnd, depth, glyph);
+            glyph = new Glyph((short)1, (short)1, (short)4);
+            symbolic = Symbol.UPPERCASE;
+        }
+        
+        Vector2f start = new Vector2f();
+        Vector2f end = new Vector2f();
+        
+        if (symbolic == Symbol.UPPERCASE){
+         start = center.subtract(new Vector2f(size.x, size.y));
+         end =  (center.add(new Vector2f(size.x, size.y)));
+         
+        } else if (symbolic == Symbol.LOWERCASE){
+        start = center.subtract(new Vector2f(size.x, size.y));
+         end =  (center.add(new Vector2f(size.x, 0)));
+        } else if (symbolic == Symbol.HANGINGLOWERCASE){
+        start = center.subtract(new Vector2f(size.x, size.y * 2));
+         end =  (center.add(new Vector2f(size.x, 0)));
+        } else if (symbolic == Symbol.NUMBER) {
+        start = center.subtract(new Vector2f(size.x/2, size.y));
+         end =  (center.add(new Vector2f(size.x/2, size.y)));
+        } else if (symbolic == Symbol.APOSTRAPHE) {
+        start = center.subtract(new Vector2f(size.x,0));
+         end =  (center.add(new Vector2f(size.x, size.y)));
+        }
+        glyphMesh = new GlyphMesh(start, end, boundStart, boundEnd, depth, glyph);
     }
 }

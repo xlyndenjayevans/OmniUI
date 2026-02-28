@@ -26,7 +26,8 @@ public class App {
         
         App.app.getAssetManager().registerLoader(GlyphLoader.class, "glyph", "glyph");
 
-        Omni sentence = new Omni("&&&&", 0.02f, new Vector2f(-1,0), new Vector2f(0,1), new Glyph());
+        Omni sentence = new Omni("Hello World, My name is Lynden Jay Evans.", 0.02f, new Vector2f(-1,0.95f), new Vector2f(1,1), new Glyph());
+         Omni sentence2 = new Omni("This is OmniUI.  A Singularity Compatible App.", 0.02f, new Vector2f(-1,0.85f), new Vector2f(1,0.9f), new Glyph());
         
        // TextGlyph text = new TextGlyph('&', 0, new Vector2f(.5f,0.5f), new Vector2f(.5f,.5f), new Vector2f(), new Vector2f(1,1));
 //        Glyph boundCircle = (Glyph) App.app.getAssetManager().loadAsset("Glyphs/UpperCaseA.glyph");//.loadModel("Models/MyModel.j3o");

@@ -36,13 +36,14 @@ public class Omni {
         this.text = text;
         boolean started = false;
         for (char c:  this.text.toCharArray()){
-        
+        System.out.println(c);
             if (!started){
             
               TextGlyph tx = new TextGlyph(c, 0, cursor.add(new Vector2f(this.textSize, -this.textSize)), new Vector2f(this.textSize, this.textSize), start, end); 
             cursor = cursor.add(new Vector2f((tx.glyphMesh.end.subtract(tx.glyphMesh.start)).x, 0));
             } else {
             
+                 
                    TextGlyph tx = new TextGlyph(c, 0, cursor, new Vector2f(this.textSize, this.textSize), start, end); 
              cursor = cursor.add(new Vector2f((tx.glyphMesh.end.subtract(tx.glyphMesh.start)).x, 0));
          
