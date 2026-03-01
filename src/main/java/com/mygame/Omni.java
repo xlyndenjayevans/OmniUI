@@ -19,19 +19,28 @@ public class Omni {
     public String text;
     public Vector2f start;
     public Vector2f end;
+    public Vector2f boundStart;
+    public Vector2f boundEnd;
+   
     public Vector2f cursor;
     public float textSize;
     public ArrayList<TextGlyph> txtGlyphs;
+    public float depth;
     
-    public Omni(String text, float textSize, Vector2f start, Vector2f end, Glyph backgroundImage){
+    public Omni(String text, float depth, float textSize, Vector2f start, Vector2f end, Vector2f boundStart, Vector2f boundEnd, Glyph backgroundImage){
     
         this.start = start;
         this.end = end;
+        this.boundStart = boundStart;
+        this.boundEnd = boundEnd;
+        this.depth = depth;
+        
         this.cursor = new Vector2f(start.x, end.y);
         this.textSize = textSize;
         omnis = new HashMap<>();
         txtGlyphs = new ArrayList<>();
         setText(text);
+        addOmni();
         
     }
     
@@ -42,13 +51,13 @@ public class Omni {
         System.out.println(c);
             if (!started){
             
-              TextGlyph tx = new TextGlyph(c, 0, cursor.add(new Vector2f(this.textSize, -this.textSize)), new Vector2f(this.textSize, this.textSize), start, end); 
+              TextGlyph tx = new TextGlyph(c, depth, cursor.add(new Vector2f(this.textSize, -this.textSize)), new Vector2f(this.textSize, this.textSize), boundStart, boundEnd); 
             cursor = cursor.add(new Vector2f((tx.glyphMesh.end.subtract(tx.glyphMesh.start)).x, 0));
             txtGlyphs.add(tx);
             } else {
             
                  
-                   TextGlyph tx = new TextGlyph(c, 0, cursor, new Vector2f(this.textSize, this.textSize), start, end); 
+                   TextGlyph tx = new TextGlyph(c, depth, cursor, new Vector2f(this.textSize, this.textSize), boundStart, boundEnd); 
              cursor = cursor.add(new Vector2f((tx.glyphMesh.end.subtract(tx.glyphMesh.start)).x, 0));
              txtGlyphs.add(tx);
             }
@@ -69,5 +78,14 @@ public class Omni {
     
     public void addOmni(){
     
+    }
+    
+    public void scroll(Vector2f distance){
+    
+        for (Omni omni: omnis.values()){
+        
+            omni.move(distance);
+            omni.scroll(distance);
+        }
     }
 }

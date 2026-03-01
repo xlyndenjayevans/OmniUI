@@ -25,11 +25,23 @@ public class App {
         App.app = main;
         
         App.app.getAssetManager().registerLoader(GlyphLoader.class, "glyph", "glyph");
-
-        Omni sentence = new Omni("Hello World, My name is Lynden Jay Evans.", 0.02f, new Vector2f(-1,0.95f), new Vector2f(1,1), new Glyph());
-        Omni sentence2 = new Omni("This is OmniUI.  A Singularity Compatible App.", 0.02f, new Vector2f(-1,0.75f), new Vector2f(1,0.9f), new Glyph());
+        Omni mainUI = new Omni("A", 0f, 0.5f, new Vector2f(-1,-1), new Vector2f(1,1),new Vector2f(-1,-1), new Vector2f(1,1), new Glyph()){
+    
+        @Override
+        public void addOmni(){
+         Omni sentence = new Omni("Hello World, My name is Lynden Jay Evans.", -0.1f, 0.02f, new Vector2f(-1,0.95f), new Vector2f(1,1),new Vector2f(-1,-1), new Vector2f(1,1),   new Glyph());
+        Omni sentence2 = new Omni("This is OmniUI.  A Singularity Compatible App.", -0.1f, 0.02f, new Vector2f(-1,0.75f), new Vector2f(1,0.9f),new Vector2f(-1,-1), new Vector2f(1,1), new Glyph());
         sentence2.move(new Vector2f(0, -0.1f));
-       // TextGlyph text = new TextGlyph('&', 0, new Vector2f(.5f,0.5f), new Vector2f(.5f,.5f), new Vector2f(), new Vector2f(1,1));
+        omnis.put("sentence", sentence);
+        omnis.put("sentence2", sentence2);
+        
+        }
+    
+        };
+        //mainUI.move(new Vector2f());
+        
+        mainUI.scroll(new Vector2f(0,-0.4f));
+           // TextGlyph text = new TextGlyph('&', 0, new Vector2f(.5f,0.5f), new Vector2f(.5f,.5f), new Vector2f(), new Vector2f(1,1));
 //        Glyph boundCircle = (Glyph) App.app.getAssetManager().loadAsset("Glyphs/UpperCaseA.glyph");//.loadModel("Models/MyModel.j3o");
 //   
 //        //boundCircle.drawCircle(new Vector2f(256,128), (short)128, new Vector4f(255,255,255,255));
