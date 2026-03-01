@@ -26,14 +26,21 @@ public class GlyphMesh {
     public Material mat;
     public Vector2f start;
     public Vector2f end;
+    public float depth;
+    public Mesh mesh;
+    public Vector2f boundStart;
+    public Vector2f boundEnd;
     
-  
     public GlyphMesh(Vector2f start, Vector2f end, Vector2f boundStart, Vector2f boundEnd, float depth, Glyph glyph){
     
         this.glyph = glyph;
         this.start = start;
         this.end = end;
-        Mesh mesh = new Mesh();
+        this.depth = depth;
+        this.boundStart = boundStart;
+        this.boundEnd = boundEnd;
+    
+        mesh = new Mesh();
 
 // 1. Define the vertices
 Vector3f[] vertices = new Vector3f[4];
@@ -84,10 +91,20 @@ geom = new Geometry("Glyph", mesh);
     }
     
     public void render(){
+    Vector3f[] vertices = new Vector3f[4];
+vertices[0] = new Vector3f(start.x, start.y, depth);
+vertices[1] = new Vector3f(end.x, start.y, depth);
+vertices[2] = new Vector3f(start.x, end.y, depth);
+vertices[3] = new Vector3f(end.x, end.y, depth);
+mesh.setBuffer(Type.Position, 3, BufferUtils.createFloatBuffer(vertices));
+mesh.updateBound();
+mesh.updateCounts();
+mat.setVector2("Start", boundStart);
+    mat.setVector2("End", boundEnd);
     mat.setColor("Color", ColorRGBA.White);
    
     mat.setTexture("ColorMap", glyph.glyph());
-    
+     
      
     
     }

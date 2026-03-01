@@ -5,6 +5,7 @@
 package com.mygame;
 
 import com.jme3.math.Vector2f;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -14,12 +15,13 @@ import java.util.HashMap;
 public class Omni {
     
     public HashMap<String, Omni> omnis;
-    public enum Symbol {UPPERCASE, LOWERCASE, DOWNLOWERCASE, NUMBER, APOSTRAPHE};
+    //public enum Symbol {UPPERCASE, LOWERCASE, DOWNLOWERCASE, NUMBER, APOSTRAPHE};
     public String text;
     public Vector2f start;
     public Vector2f end;
     public Vector2f cursor;
     public float textSize;
+    public ArrayList<TextGlyph> txtGlyphs;
     
     public Omni(String text, float textSize, Vector2f start, Vector2f end, Glyph backgroundImage){
     
@@ -28,6 +30,7 @@ public class Omni {
         this.cursor = new Vector2f(start.x, end.y);
         this.textSize = textSize;
         omnis = new HashMap<>();
+        txtGlyphs = new ArrayList<>();
         setText(text);
         
     }
@@ -41,18 +44,30 @@ public class Omni {
             
               TextGlyph tx = new TextGlyph(c, 0, cursor.add(new Vector2f(this.textSize, -this.textSize)), new Vector2f(this.textSize, this.textSize), start, end); 
             cursor = cursor.add(new Vector2f((tx.glyphMesh.end.subtract(tx.glyphMesh.start)).x, 0));
+            txtGlyphs.add(tx);
             } else {
             
                  
                    TextGlyph tx = new TextGlyph(c, 0, cursor, new Vector2f(this.textSize, this.textSize), start, end); 
              cursor = cursor.add(new Vector2f((tx.glyphMesh.end.subtract(tx.glyphMesh.start)).x, 0));
-         
+             txtGlyphs.add(tx);
             }
             
         }
     }
     
     public void move(Vector2f distance){
+    
+        for (TextGlyph tx: txtGlyphs){
+        
+            tx.glyphMesh.start = tx.glyphMesh.start.add(distance);
+            tx.glyphMesh.end = tx.glyphMesh.end.add(distance);
+            
+            tx.glyphMesh.render();
+        }
+    }
+    
+    public void addOmni(){
     
     }
 }
