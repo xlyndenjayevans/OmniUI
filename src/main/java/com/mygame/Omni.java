@@ -15,7 +15,6 @@ import java.util.HashMap;
 public class Omni {
     
     public HashMap<String, Omni> omnis;
-    //public enum Symbol {UPPERCASE, LOWERCASE, DOWNLOWERCASE, NUMBER, APOSTRAPHE};
     public String text;
     public Vector2f start;
     public Vector2f end;
